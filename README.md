@@ -254,11 +254,12 @@ Ahora estamos listos para comenzar a entrenar nuestro modelo en caso de que quie
 
 Primero necesitamos crear o iniciar sesión en el https://developer.spotify.com/ plataforma y lo primero que vamos a hacer es crear una aplicación que sea realmente sencilla, luego de esto vamos a tener en el Dashboard nuestra aplicación y tenemos que darle clic. Luego seremos redirigidos a la descripción general de la aplicación y tendremos que seleccionar editar configuración para agregar algunas URL: 
 
-´´´
+```
+
 http://localhost:8888/callback   
 http://localhost:8080  
 
-´´´
+```
 
 Agregalas para redireccionar las URIs:
 
@@ -284,15 +285,18 @@ Asegúrate de que el nombre corresponda a su teléfono o dispositivo utilizado.
 
 Ahora que tenemos todo preparado en la plataforma de Desarrolladores, debemos regresar a nuestra Raspberry Pi y abrir nuestro editor. Usé Thonny pero antes de usar nuestro código final necesitamos ejecutar un código anterior, solo para que Spotipy inicie sesión desde la Raspberry a nuestra cuenta de Spotify. 
 Después de esto, el código ya no solicitará iniciar sesión ni solicitara credenciales en el dispositivo en el que estamos ejecutando nuestro código final. Una última cosa, si desea utilizar una canción específica, debe copiar el enlace de esa canción en Spotify. Opción en Spotify para copiar la canción como enlace. 
+
 Aquí hay un ejemplo: 
 https://open.spotify.com/track/**3h3XIdPa1W8NtxEw0TOQHb**si=cc4dd6b0ea0f41f6 
 Entonces, en nuestro enlace marqué en negrita el código que debes copiar del enlace y reemplazar la última parte de esta línea código.
-´´´
+
+```
 uris=['spotify:track:3h3XIdPa1W8NtxEw0TOQHb']
-´´´
+```
+
 Ahora puedes reproducir desde tu código en Python cualquier canción que quieras. Copia, pega y ejecuta este código:
 
-´´´
+```
 import spotipy   
 from spotipy.oauth2 import SpotifyOAuth   
 from pprint import pprint   
@@ -308,7 +312,7 @@ sp = spotipy.Spotify(
 	         redirect_uri=redirect_uri,       
 	         scope=scope, open_browser=False))   
 sp.start_playback(device_id=device_id ,uris=['spotify:track:1o7D1gLUgpFR3eJfIgpSUx'])   
-´´´
+```
 
 Cuando ejecutas el código, proporciona un enlace en el que debes hacer clic y ahí es donde te pedirá que inicies sesión. El mismo enlace que envió debe copiarse y pegarse en un campo que te pide que pegues el enlace después de eso. Una vez todo configurado para usar Spotify con nuestro código final, continúa ejecutando el proyecto final. 
 
@@ -321,9 +325,9 @@ edge-impulse-data-forwarder, debes cargar el siguiente a tu Arduino Nicla. [Cód
 Una vez que lo hayas hecho, y cuando escribas el comando edge-impulse-data-forwarder te preguntará el nombre de las variables, debes asegurarte de que coincidan, así que copia y pega esto en la terminal donde te pregunta los nombres de las variables. 
 y solo sigue la documentación: 
 
-´´´
+```
 accX, accY, accZ, gyrX, gyrY, gyrZ, rumbo, cabeceo, balanceo, rotX, rotY, rotZ, rotW   
-´´´
+```
 
 Una vez que termines de diseñar tu modelo en la plataforma, debes ir a **Live Classification** y Datos de entrada con la función **Start Sampling** antes de ir a Prueba de modelo. 
 Un consejo para usar una función que es realmente sorprendente de la plataforma Edge Impulse, es que te permite mapear las muestras que podrían tener errores en tu modelo, las marcadas en rojo en el **Feature explorer** son las que tal vez deberías eliminar del muestreo, y al seleccionarlos en el Explorador de funciones se mostrará el nombre para localizarlos y borrarlos tan fácilmente como hacer clic en los 3 puntos a la derecha de ese muestreo. 
@@ -353,7 +357,7 @@ Ahora podemos ir a ejemplos, verificar la carpeta en la biblioteca con el nombre
 
 Borra las siguientes líneas para preparar nuestro script Arduino, extraen valores de sensores que no necesitamos para el modelo creado: 
 
-´´´
+```
 /* Private variables ------------------------------------------------------- */
 Sensor temp(SENSOR_ID_TEMP);
 Sensor baro(SENSOR_ID_BARO);
@@ -373,18 +377,18 @@ temp.begin();
 baro.begin();
 hum.begin();
 gas.begin();
-´´´
+```
 
 Una vez que tengamos listo este archivo podemos guardarlo y comenzar a comentar unas líneas para centrarnos únicamente en el clasificador: 
 
-´´´
+```
 //ei_printf("\nStarting inferencing in 2 seconds...\r\n");
 //ei_printf("Sampling...\r\n");
 // print the predictions
 //ei_printf("Predictions (DSP: %d ms., Classification: %d ms., Anomaly: %d ms.):\r\n",
 //result.timing.dsp, result.timing.classification, result.timing.anomaly);
 //ei_printf("%s: %.5f\r\n", result.classification[ix].label, result.classification[ix].value);
-´´´
+```
 
 La última modificación que haremos es agregar estas líneas en el bucle for que forma parte para imprimir las predicciones: 
 
@@ -392,7 +396,7 @@ La última modificación que haremos es agregar estas líneas en el bucle for qu
 <img src="media_bot/9.png" width="60%">
 </center>
 
-´´´
+```
 if(result.classification[ix].value>0.8){   
 	         if(result.classification[ix].label=="jump"){   
 	           Serial.print(1);   
@@ -405,13 +409,15 @@ if(result.classification[ix].value>0.8){
 	           }   
 	         }   
 
-´´´
+```
 
 Una vez que tengamos listo este archivo el Arduino se centrará en las salidas y podemos dejarlo como está, esto permitirá que Arduino comunique las salidas del modelo en el puerto serial. 
 Esto significa que si conectamos el Arduino a nuestra Raspberry atraves de USB, podemos leer estos valores con un script de Python con salida de el siguiente comando.
-´´´
+
+```
 model = ser.read()
-´´´
+```
+
 Para verificar el puerto serial en Raspberry donde está conectado el Arduino escriba en la terminal **dmesg | grep -i tty** con ese puerto necesitamos copiar el nombre en caso de que utilicemos una comunicación en serie entre Nicla Sense ME y la Raspberry (esto es opcional, el objetivo de este proyecto es utilizar la comunicación Bluetooth). 
 Pero estamos intentando que sea inalámbrico, por lo que este código que acabamos de modificar puede usarse como base para comenzar a mezclarlo con la biblioteca BLE que es compatible con la placa Arduino Nicla Sense Me. 
 Al final encontrarás el código base de la Placa Nicla para comunicar el Arduino con la Raspberry usando Bluepy.
