@@ -255,10 +255,8 @@ Ahora estamos listos para comenzar a entrenar nuestro modelo en caso de que quie
 Primero necesitamos crear o iniciar sesión en el https://developer.spotify.com/ plataforma y lo primero que vamos a hacer es crear una aplicación que sea realmente sencilla, luego de esto vamos a tener en el Dashboard nuestra aplicación y tenemos que darle clic. Luego seremos redirigidos a la descripción general de la aplicación y tendremos que seleccionar editar configuración para agregar algunas URL: 
 
 ```
-
 http://localhost:8888/callback   
 http://localhost:8080  
-
 ```
 
 Agregalas para redireccionar las URIs:
@@ -408,7 +406,6 @@ if(result.classification[ix].value>0.8){
 	           Serial.print(3);   
 	           }   
 	         }   
-
 ```
 
 Una vez que tengamos listo este archivo el Arduino se centrará en las salidas y podemos dejarlo como está, esto permitirá que Arduino comunique las salidas del modelo en el puerto serial. 
@@ -429,30 +426,31 @@ También puedes usar el código base para transmitir las variables para el model
 Puedes encontrar los códigos de cada placa al final pero es necesario crear un archivo .h para cada una con las credenciales de tu WiFi. 
 En Arduino hay una opción hasta el botón de abrir monitor serie que si haces clic en ella aparecerá la función desplegable y una de ellas es crear una nueva pestaña, crea una con el nombre de secrets.h y luego pondrás estas líneas de código:
 
-´´´
+```
 const char WIFI_PASS[] = ""; //Password of the network  
-´´´ 
+``` 
 
 Esto es necesario para los archivos de todas las placas que van a hacer que se pueda conectar adecuadamente usando WiFi NiNa.
 
 Una cosa extra para el kit Arduino Oplá IoT es repetir los mismos pasos y crear un archivo secrets.h uno para las credenciales y otro extra para la canción que incluye el buzzer en el Carrier, puedes crear tantas canciones como quieras, solo asegúrate de ponerlo en el formato correcto como este que usé con mi proyecto, ve a este [enlace](https://create.arduino.cc/editor/FT-CONTENT/37b7521c-325b-4868-b2c5-cf98cd2f0d45/preview?_gl=1*ml9iqj*_ga*MjAwOTE1MTc1NS4xNjcyNDE0MTQx*_ga_NEXN8H46L5*MTY3NTUzNDY1NS4xMDguMS4xNjc1NTM0ODI2LjAuMC4w) y copia el archivo pitches.h.
 
 Tambien es necesario poner la dirección IP correspondiente a su broker en esta línea de código y hacer lo mismo para el Arduino Nano RP2040: 
-´´´
+```
 IPAddress server(192, 168, 0, 0);
-´´´
+```
 
 <!-- Y una última cosa que debo mencionar es que para cargar el código debes instalar y configurar PlatformIO con el código de Visual Studio, una vez que hayas hecho eso, carga el archivo Arduino BLE_model en Nicla Sense ME. Con esto estarás listo para utilizar el modelo de este proyecto con Bluetooth para enviar los resultados del clasificador a Python en Linux. ---->
 
 También para cargar el código tienes que instalar la biblioteca BHY2 1.0.4 que es la versión que usé y que se ejecuta correctamente, luego tienes que ir a \libraries\Arduino_BHY2\src y buscar este archivo BoschSensortec.h, abrirlo y cambiar esto. 
 valor:
-´´´
+
+```
 #define WORK_BUFFER_SIZE    2048 
-´´´
+```
 Cambiarlo por: 
-´´´
+```
 #define WORK_BUFFER_SIZE    64   
-´´´
+```
 Esto nos permite cargar apropiadamente nuestro modelo con la libreria BLE
 
 ## Workflow (Metodología) Run the code
@@ -477,7 +475,7 @@ Ejecutan las instrucciones preparadas para ese movimiento, como mencioné antes 
 
 Una última cosa que me gustaría resaltar son las partes del código que puedes comentar en caso de que estés usando una opción diferente para el robot o no estés usando robot y hayas agregado otro elemento en el proyecto, así que si ese es el caso, por favor coment, borra o reemplaza las siguientes líneas:
 
-´´´
+```
 from buildhat import Motor   
 from buildhat import MotorPair   
 right_arm = Motor('A') #define the port to connect the motor for the right arm   
@@ -505,12 +503,13 @@ def backb():#move back arms at same time     
 	   sleep(0.5)       
 	   back()      
 	   sleep(0.5)   
-´´´
+```
 
 Y también cambia la dirección IP para esta línea de código, poniendo la IP correspondiente a la Raspberry.
-´´´
+
+```
 broker_address = "192.168.xx.x" #put the ip from Raspberry as broker_address
-´´´
+```
 Otro cambio en el codigo que debes hacer es cambiar la dirección MAC para la comunicación Bluetooth entre los dispositivos, así que ve al archivo Python en la última parte del código y cambia la dirección de tu placa. 
 Hay dos formas de hacerlo, una es con el archivo scanner.py adjunto en este repo es necesario para ejecutarlo desde la terminal en Raspberry, le mostrará los dispositivos disponibles y el otro es abrir el monitor serie en Arduino una vez que cargue el código en Nicla de esta manera:
 
@@ -520,14 +519,15 @@ Hay dos formas de hacerlo, una es con el archivo scanner.py adjunto en este repo
 
 
 Copia y pega el valor en la siguiente línea:
-´´´
+
+```
 p = btle.Peripheral("1a:b4:c0:25:3a:aa")#use the scanner.py file to obtain this BLE address for the NICLA
-´´´
+```
 Además, una última edición de nuestro código es la ruta del directorio de nuestros archivos multimedia que se van a reproducir. Edita o comenta estas líneas dependiendo de si las va a utilizar o no. 
 
-´´´
+```
 player= vlc.MediaPlayer('/home/pi/Desktop/media/model4/ink4.mp4') #CHANGE DIRECTORY 
-´´´
+```
 
 Ahora que tenemos una idea clara sobre el proyecto completo, podemos ejecutar el código.
 
@@ -582,18 +582,4 @@ Observaciones sobre el proyecto
 - Agregue esculturas cinéticas con impresión 3D usando servomotores y motores DC para agregar un efecto como el de la película Matilda.
 - Prototipo de prueba con bailarina.
 - Agrega efectos mágicos y agrega más efectos visuales con las animaciones.
-async-timeout==4.0.3
-bluepy==1.3.0
-buildhat==0.7.0
-certifi==2024.8.30
-charset-normalizer==3.4.0
-colorzero==2.0
-gpiozero==2.0.1
-idna==3.10
-paho-mqtt==2.1.0
-pyserial==3.5
-python-vlc==3.0.21203
-redis==5.2.0
-requests==2.32.3
-spotipy==2.24.0
-urllib3==2.2.3
+
