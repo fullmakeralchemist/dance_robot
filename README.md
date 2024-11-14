@@ -257,6 +257,7 @@ Primero necesitamos crear o iniciar sesión en el https://developer.spotify.com/
 ´´´
 http://localhost:8888/callback   
 http://localhost:8080  
+
 ´´´
 
 Agregalas para redireccionar las URIs:
