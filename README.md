@@ -539,7 +539,8 @@ Placa Arduino inalámbrica utilizando el corredor MQTT como elemento de traducto
 
 Podemos ejecutar el script para reproducir la animación en el proyector y activar las luces como predice el modelo implementado(**antes de ejecutar el script, asegúrese de que la ruta en la condición del script sea correcta**).
 
-video
+[![Demo Proyector](https://img.youtube.com/vi/_X0TFTJeD0U/0.jpg)](https://youtu.be/_X0TFTJeD0U?feature=shared)
+
 
 Nota: Lo hice por separado ya que el proyector es prestado y no me dio tiempo de probar todos los elementos juntos, ya que pensé que el robot no se apreciaría en el video con poca iluminación. 
 El script que sirve de interfaz entre Raspberry, Arduino y los elementos utilizados es capaz de imprimir el estado del reproductor VLC así como la conexión MQTT no necesita conexión a internet, solo conectado al mismo router al que está conectado el Oplá. 
@@ -547,10 +548,8 @@ La tarjeta Arduino Nano también pueden funcionar en un hotspot de un teléfono 
 En general, la CPU del script podria requerir más potencia si hay muchas ventanas de VLC abiertas, así que agrego una condición relacionada con el estado del reproductor para que cuando termine la animación, el reproductor se cierre para reducir el uso de la CPU y evitar el uso innecesario de la CPU.
 Ahora veamos un vídeo de cómo funciona todo junto.
 
-video
-<center>
-<img src="media_bot/projection.mp4" width="60%">
-</center>
+[![Demo Robot iteractivo](https://img.youtube.com/vi/FAeuIUkGI3k/0.jpg)](https://youtu.be/FAeuIUkGI3k?feature=shared)
+
 
 Este fue mi proyecto con todos los recursos que tengo pero puede servir como base para crear algo más grande. Me imagino algo como esto:
 
