@@ -548,15 +548,18 @@ En general, la CPU del script podria requerir más potencia si hay muchas ventan
 Ahora veamos un vídeo de cómo funciona todo junto.
 
 video
+<center>
+<img src="media_bot/projection.mp4" width="60%">
+</center>
 
 Este fue mi proyecto con todos los recursos que tengo pero puede servir como base para crear algo más grande. Me imagino algo como esto:
 
 <center>
-<img src="media_bot/17.png" width="60%">
+<img src="media_bot/17.gif" width="60%">
 </center>
 
 <center>
-<img src="media_bot/18.png" width="60%">
+<img src="media_bot/18.gif" width="60%">
 </center>
 
 ## Desafíos con los que me encontré y lo que aprendí
