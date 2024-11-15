@@ -339,9 +339,9 @@ Después de que la prueba de su modelo tenga una precisión igual o superior al 
 Ahora podemos exportar como biblioteca seleccionando la opción, entonces no es necesario seleccionar una placa para Nicla Sense ME y por favor seleccione la casilla para optimizar el modelo, se exportará y ahora podrá seguir los pasos para importarlo en Arduino IDE como una libreria. 
 Y este es mi modelo en la plataforma Edge Impulse Studio que debes incluir en el IDE de Arduino como biblioteca. 
 
-penduente
-También puedes descargarlo como un archivo ZIP desde este [enlace](https://drive.google.com/file/d/1Xw_pMS1q8sWmX0Of4hZIFeWf8iHbAMMJ/view?usp=share_link). 
-No olvides que necesitas los archivos de video para el proyector usados en este proyecto. Ve a este enlace para descargarlo y usarlo. 
+
+También puedes descargarlo como un archivo ZIP desde este [enlace](https://drive.google.com/drive/folders/14SmGoDSalr-dO51YyV01U2yEpE5bEOcp?usp=drive_link). 
+No olvides que necesitas los archivos de video para el proyector usados en este proyecto. Ve a este enlace [media videos mp4](https://drive.google.com/drive/folders/14SmGoDSalr-dO51YyV01U2yEpE5bEOcp?usp=drive_link) para descargarlo y usarlo. 
 
 <center>
 <img src="media_bot/7.png" width="60%">
@@ -480,28 +480,28 @@ from buildhat import Motor
 from buildhat import MotorPair   
 right_arm = Motor('A') #define the port to connect the motor for the right arm   
 left_arm = Motor('B')#define the port to connect the motor for the left arm   
-def combo(): #movement of arms       
-	   print("Run combo")       
-	   right_arm.run_for_seconds(1.3, speed=-100)       
+def combo(): #movement of arms   
+	   print("Run combo")  
+	   right_arm.run_for_seconds(1.3, speed=-100)   
 	   left_arm.run_for_seconds(1.3, speed=100)   
-def back():#back to initial position       
-	   print("Run back")       
-	   right_arm.run_for_seconds(1.3, speed=100)        
+def back():#back to initial position  
+	   print("Run back")
+	   right_arm.run_for_seconds(1.3, speed=100)
 	   left_arm.run_for_seconds(1.3, speed=-100)   
-def both():#move arms at same time        
-	   print("Run both")        
-	   right_arm.run_for_seconds(3, speed=-100, blocking=False)        
+def both():#move arms at same time
+	   print("Run both")  
+	   right_arm.run_for_seconds(3, speed=-100, blocking=False)
 	   left_arm.run_for_seconds(3, speed=100, blocking=False)   
-def backb():#move back arms at same time        
-	   print("Run backb")        
-	   right_arm.run_for_seconds(3, speed=100, blocking=False)        
+def backb():#move back arms at same time
+	   print("Run backb")
+	   right_arm.run_for_seconds(3, speed=100, blocking=False)
 	   left_arm.run_for_seconds(3, speed=-100, blocking=False)   
 #<----> in the if's there is a for for each one to move the motors of the LegoPi depending on the move   
 #Comment all the for's in case you are not using Lego   
-	   #for to move twice the robot arms       
-	   combo()       
-	   sleep(0.5)       
-	   back()      
+	   #for to move twice the robot arms  
+	   combo()
+	   sleep(0.5)
+	   back()
 	   sleep(0.5)   
 ```
 
@@ -541,7 +541,6 @@ Podemos ejecutar el script para reproducir la animación en el proyector y activ
 
 [![Demo Proyector](https://img.youtube.com/vi/_X0TFTJeD0U/0.jpg)](https://youtu.be/_X0TFTJeD0U?feature=shared)
 
-
 Nota: Lo hice por separado ya que el proyector es prestado y no me dio tiempo de probar todos los elementos juntos, ya que pensé que el robot no se apreciaría en el video con poca iluminación. 
 El script que sirve de interfaz entre Raspberry, Arduino y los elementos utilizados es capaz de imprimir el estado del reproductor VLC así como la conexión MQTT no necesita conexión a internet, solo conectado al mismo router al que está conectado el Oplá. 
 La tarjeta Arduino Nano también pueden funcionar en un hotspot de un teléfono inteligente. 
@@ -549,7 +548,6 @@ En general, la CPU del script podria requerir más potencia si hay muchas ventan
 Ahora veamos un vídeo de cómo funciona todo junto.
 
 [![Demo Robot iteractivo](https://img.youtube.com/vi/FAeuIUkGI3k/0.jpg)](https://youtu.be/FAeuIUkGI3k?feature=shared)
-
 
 Este fue mi proyecto con todos los recursos que tengo pero puede servir como base para crear algo más grande. Me imagino algo como esto:
 
